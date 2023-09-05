@@ -1,0 +1,101 @@
+données
+nomP2,nomP,difficulté                        :chaîne
+nbjoueur , timer , score1 , score2 , bonus, WS1  WS2 ,tour   :entier
+fin_données
+
+début
+  répéter 
+    score1 <-- 0
+    score2 <-- 0
+    bonus  <-- 20
+    tour   <-- 1
+    répéter
+        saisir "nombre de joueur dans la partie" , nbjoueur
+    jusqu'à   nbjoueur = 1,2
+
+    saisir "nom du joueur 1" , nomP
+
+    si nbjoueur = 2
+    alors
+        saisir "nom du joueur 2" , nomP2
+    fin_si
+
+    répéter
+        saisir "difficulté" , difficulté
+    jusqu'à  difficulté = 1,2,3
+
+    si nomP ou nomP2 veulent changer  de difficulté , nbjoueur 
+    alors
+        revenir au début
+        
+    fin_si
+
+    
+
+    connection database
+
+    // début de la partie 
+
+    questions:
+    pour i de 1 à 10*nbjoueur pas 1 faire 
+
+      tour = 1 - tour
+
+        si
+            nomP repond correctement
+         alors
+            score1 <-- score1 + 10 
+            WS1 <-- WS1 + 1
+        fin_si
+        
+        si 
+            nomP2 répond correctement
+         alors
+            score2 <-- score2 + 10
+            W  <-- WS2 + 1
+            
+        fin_si
+
+        si
+            timer = 0
+         alors
+            question suivante
+        fin_si
+
+        si WS1 = 5
+         alors
+             question bonus
+         
+            si nomP repond correctement
+            alors
+                score1 = score1 + bonus
+            fin_si
+        fin_si
+
+        si WS2 = 5
+         alors
+             question bonus
+
+            si nomP2 repond correctement
+            alors
+                score2 = score2 + bonus
+            fin_si
+        fin_si
+    fin_pour 
+   
+    
+    
+    // fin du jeu au bout de 10 questions
+
+    si score1<score2
+     alors
+        afficher "le joueur 2 remporte la victoire avec un score total de :" , score2
+        
+     sinon
+        afficher "le joueur 1 remporte la victoire avec un score total de :" , score1
+    fin_si
+
+    afficher "score final du joueur 1:" , score1 , "score final du joueur 2 :" , score2 
+
+  jusqu'à fermeture de l'application
+fin
