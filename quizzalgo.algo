@@ -1,6 +1,7 @@
 données
 nomP2,nomP,difficulté                        :chaîne
-nbjoueur , timer , score1 , score2 , bonus, WS1  WS2 ,tour   :entier
+nbjoueur , timer , score1 , score2 , bonus, WS1 , WS2 ,tour, temps_écoulé   :entier
+points_question         : entier
 fin_données
 
 début
@@ -9,6 +10,7 @@ début
     score2 <-- 0
     bonus  <-- 20
     tour   <-- 1
+    points_question  <-- 20
     répéter
         saisir "nombre de joueur dans la partie" , nbjoueur
     jusqu'à   nbjoueur = 1,2
@@ -16,7 +18,7 @@ début
     saisir "nom du joueur 1" , nomP
 
     si nbjoueur = 2
-    alors
+     alors
         saisir "nom du joueur 2" , nomP2
     fin_si
 
@@ -25,7 +27,7 @@ début
     jusqu'à  difficulté = 1,2,3
 
     si nomP ou nomP2 veulent changer  de difficulté , nbjoueur 
-    alors
+     alors
         revenir au début
         
     fin_si
@@ -38,26 +40,31 @@ début
 
     questions:
     pour i de 1 à 10*nbjoueur pas 1 faire 
-
+      temps_écoulé <-- 0
+      timer <--20
       tour = 1 - tour
+      joueurs = [nomP , nomP2]
 
-        si
-            nomP repond correctement
-         alors
-            score1 <-- score1 + 10 
-            WS1 <-- WS1 + 1
-        fin_si
+        tant que temps_écoulé < timer faire
+         attendre une seconde
+
+         temps_écoulé <-- temps_écoulé  + 1
+    
+            si joueurs[tour] == nomP
+             alors
+                score1 <-- score1 + (20 - temps_écoulé  )
+                WS1 <-- WS1 + 1
+            fin_si
+
+            si joueurs[tour] == nomP2
+             alors
+                score2 <-- score2 + (20 - temps_écoulé  )
+                WS1 <-- WS1 + 1
+            fin_si
+        fin_tant_que 
         
-        si 
-            nomP2 répond correctement
-         alors
-            score2 <-- score2 + 10
-            W  <-- WS2 + 1
-            
-        fin_si
-
         si
-            timer = 0
+            temps_écoulé = 20
          alors
             question suivante
         fin_si
@@ -67,7 +74,7 @@ début
              question bonus
          
             si nomP repond correctement
-            alors
+             alors
                 score1 = score1 + bonus
             fin_si
         fin_si
@@ -77,7 +84,7 @@ début
              question bonus
 
             si nomP2 repond correctement
-            alors
+             alors
                 score2 = score2 + bonus
             fin_si
         fin_si
