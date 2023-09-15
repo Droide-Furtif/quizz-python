@@ -105,7 +105,7 @@ class Game:
             C.blit_text(self.screen, r[1], (70+300*i, 650), 280+300*i, C.font_pixelop8small, 'white')
         # affichage nom joueur en cours
         if self.nbr_players == 2:
-            C.blit_text(self.screen, f"{self.nom_joueurs[self.current_player]}", (C.WIN_X/6, 10), C.WIN_X/1.4, C.font_karmatic30, C.YELLOW)
+            C.blit_text(self.screen, f"{self.nom_joueurs[self.current_player]}", (C.WIN_X/6, 10), C.WIN_X/1.4, C.font_karmatic30, C.YELLOW)    
         # affichage scores
         C.blit_text(self.screen, f"{self.scores[0]} pts",
                     C.pos_game_score_1, C.WIN_X, C.font_karmatic20, 'white')
@@ -121,8 +121,10 @@ class Game:
 
         # texte bouton retour menu
         C.blit_text(self.screen, 'Quit', C.pos_quit_text, 280, C.font_karmatic30, '#b01010')
+        
         self.screen.blit(self.icone_j1, (1000, 150))
-        self.screen.blit(self.icone_j2, (1000, 260))
+        if self.nbr_players == 2:
+            self.screen.blit(self.icone_j2, (1000, 260))
         # affichage texte difficulté
 
 

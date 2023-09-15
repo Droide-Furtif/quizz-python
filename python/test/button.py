@@ -20,19 +20,21 @@ class Button:
         self.pushed = False
         self.t = 0
         self.permapushed = permapushed
-
+        self.visible = True
     def update(self):
         # button press 'animation', button stay pushed for 0.5s (30frames)
-        if self.pushed: self.t += 1
-        if self.t > 30 and not self.permapushed:
-            self.pushed = False
-            self.t = 0
+        if self.visible:
+            if self.pushed: self.t += 1
+            if self.t > 30 and not self.permapushed:
+                self.pushed = False
+                self.t = 0
 
     def draw(self):
-        if self.pushed:
-            self.screen.blit(self.pushed_img, (self.x, self.y))
-        else:
-            self.screen.blit(self.unpushed_img, (self.x, self.y))
+        if self.visible:
+            if self.pushed:
+                self.screen.blit(self.pushed_img, (self.x, self.y))
+            else:
+                self.screen.blit(self.unpushed_img, (self.x, self.y))
 
     def checkForClick(self):
         x, y = pygame.mouse.get_pos()

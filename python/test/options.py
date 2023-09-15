@@ -34,6 +34,7 @@ class Options:
         # on appuie sur les boutons réglages par ddéfaut (1 joueur et difficulté récupérée dans l'app - par défaut 1)
         self.btn_list[self.app.difficulte].pushed = True
         self.btn_list[5].pushed = True
+        self.btn_list[8].visible = False
 
     def update(self, events):
         # updates and check events of button
@@ -85,11 +86,13 @@ class Options:
             elif b.isClicked('1-player'):
                 self.text_inputs[1].visible = False
                 self.btn_list[6].pushed = False
+                self.btn_list[8].visible = False
                 self.app.game.nbr_players = 1
 
             elif b.isClicked('2-player'):
                 self.text_inputs[1].visible = True
                 self.btn_list[5].pushed = False
+                self.btn_list[8].visible = True
                 self.app.game.nbr_players = 2
 
             elif b.isClicked('quit'):
