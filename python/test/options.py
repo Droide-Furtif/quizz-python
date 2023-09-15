@@ -64,6 +64,8 @@ class Options:
                     # envoie les noms rentrés à la variable du jeu
                     self.app.game.nom_joueurs = [self.app.options.text_inputs[0].input.value,
                                                  self.app.options.text_inputs[1].input.value]
+                    self.app.game.icone_j1 = C.img_options_icones[self.j1]
+                    self.app.game.icone_j2 = C.img_options_icones[self.j2]
 
             elif b.isClicked('easy'):
                 self.app.difficulte = 1
@@ -103,6 +105,7 @@ class Options:
                 if self.j1 == self.j2:
                     self.j1 += 1
                 b.change_image(C.img_options_icones[self.j1], C.img_options_icones[self.j1])
+                img_j1 = self.j1
             elif b.isClicked('icone_j2'):
                 self.j2 +=1
                 if self.j2 > len(C.img_options_icones)-1:
@@ -110,6 +113,7 @@ class Options:
                 if self.j2 == self.j1:
                     self.j2 += 1
                 b.change_image(C.img_options_icones[self.j2], C.img_options_icones[self.j2])
+                img_j2 = self.j2
 
 
     def draw_text(self):

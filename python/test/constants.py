@@ -46,8 +46,11 @@ pos_options_bg_text_2 = (226,473)
 pos_options_icon1 = (140,245)
 pos_options_icon2 = (660,245)
 
-pos_game_score_1 = (WIN_X-250, 160)
-pos_game_score_2 = (WIN_X-250, 210)
+pos_game_joueur_1 = (1100, 164)
+pos_game_joueur_2 = (1100, 275)
+pos_game_score_1 = (1100, 189)
+pos_game_score_2 = (1100, 300)
+pos_game_score_icone_1 = (1000,200)
 
 pos_gameover_retour = (55,40)
 pos_gameover_rejouer = (545,40)

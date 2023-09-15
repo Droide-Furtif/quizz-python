@@ -49,6 +49,10 @@ class Game:
         self.scores = [0, 0]
         self.current_player = 0
         self.nbr_players = 1
+        
+        # icone des joueurs
+        self.icone_j1 = None
+        self.icone_j2 = None
 
         # choisis une question
         self.reset()
@@ -103,15 +107,22 @@ class Game:
         if self.nbr_players == 2:
             C.blit_text(self.screen, f"{self.nom_joueurs[self.current_player]}", (C.WIN_X/6, 10), C.WIN_X/1.4, C.font_karmatic30, C.YELLOW)
         # affichage scores
-        C.blit_text(self.screen, f"{self.nom_joueurs[0]} : {self.scores[0]}",
+        C.blit_text(self.screen, f"{self.scores[0]} pts",
                     C.pos_game_score_1, C.WIN_X, C.font_karmatic20, 'white')
         if self.nbr_players == 2:
-            C.blit_text(self.screen, f"{self.nom_joueurs[1]} : {self.scores[1]}",
+            C.blit_text(self.screen, f"{self.scores[1]} pts",
                         C.pos_game_score_2, C.WIN_X, C.font_karmatic20, 'white')
+        # affichage joueurs
+        C.blit_text(self.screen, f"{self.nom_joueurs[0]}",
+                    C.pos_game_joueur_1, C.WIN_X, C.font_karmatic20, 'white')
+        if self.nbr_players == 2:
+            C.blit_text(self.screen, f"{self.nom_joueurs[1]}",
+                        C.pos_game_joueur_2, C.WIN_X, C.font_karmatic20, 'white')
 
         # texte bouton retour menu
         C.blit_text(self.screen, 'Quit', C.pos_quit_text, 280, C.font_karmatic30, '#b01010')
-
+        self.screen.blit(self.icone_j1, (1000, 150))
+        self.screen.blit(self.icone_j2, (1000, 260))
         # affichage texte difficulté
 
 
