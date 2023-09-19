@@ -138,6 +138,7 @@ L_RED = "#c49d99"
 D_PURPLE = "#44003f"
 PURPLE = "#5e006b"
 L_PURPLE = "#bf99c4"
+BLACK = "#000000"
 '''
 TO DO v
 '''

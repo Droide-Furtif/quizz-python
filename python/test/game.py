@@ -120,7 +120,7 @@ class Game:
                         C.pos_game_joueur_2, C.WIN_X, C.font_karmatic20, 'white')
 
         # texte bouton retour menu
-        C.blit_text(self.screen, 'Quit', C.pos_quit_text, 280, C.font_karmatic30, '#b01010')
+        C.blit_text(self.screen, 'Quit', C.pos_quit_text, 280, C.font_karmatic30, C.BLACK)
         
         self.screen.blit(self.icone_j1, (1000, 150))
         if self.nbr_players == 2:

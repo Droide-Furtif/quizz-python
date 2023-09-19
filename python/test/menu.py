@@ -29,7 +29,7 @@ class Menu:
             b.draw()
         # start button text
         C.blit_text(self.screen, "Start", C.pos_menu_start_text, C.WIN_X, C.font_karmatic20)
-        C.blit_text(self.screen, "Quitter", C.pos_menu_quit_text, C.WIN_X, C.font_karmatic20, C.RED)
+        C.blit_text(self.screen, "Quitter", C.pos_menu_quit_text, C.WIN_X, C.font_karmatic20, C.BLACK)
         C.blit_text(self.screen, "Regles", C.pos_menu_regle_text, C.WIN_X, C.font_karmatic20)
         C.blit_text(self.screen, "Scores", C.pos_menu_score_text, C.WIN_X, C.font_karmatic20)
 
