@@ -1,0 +1,98 @@
+algorithme Quizz Game
+
+données
+ j1, j2, : chaîne
+ nombre_joueur, timer, temps_écoulé, reponse_joueur, facteur : entier
+ difficulté, tour, point_max, score_j1, score_j2 : entier
+ reponses[4] : reponse_db
+ questions : question_db
+fin_données
+
+début
+    difficulté ⬅ 0
+    tour   ⬅  0
+    point_max ⬅ 150
+    score_j1 ⬅  0
+    score_j2 ⬅  0
+    timer ⬅ 25
+
+    /////////////////////////////////////////// Choix du nombre de joueurs /////////////////////////////////////////////////////
+    répéter
+        saisir "nombre de joueur dans la partie : " , nombre_joueur
+    jusqu'à   nombre_joueur ≤ 1 OU nombre_joueur ≥ 2
+
+    /////////////////////////////////////////// Saisie des noms des joueurs ///////////////////////////////////////////
+    saisir "nom du joueur 1 : " , j1
+    si nombre_joueur = 2 alors
+        saisir "nom du joueur 2 : " , j2
+    fin_si
+
+    /////////////////////////////////////////// Choix de la difficulté ///////////////////////////////////////////
+    répéter
+        saisir "difficulté : 1.facile, 2.moyen, 3.difficile : ", difficulté
+    jusqu'à  difficulté ≥ 1 ou difficulté ≤ 3
+
+    ///////////////////////////////// Facteur de multiplication en fonction de la difficuté /////////////////////////////////
+    selon difficulté faire
+        1 : facteur ⬅ 1
+        2 : facteur ⬅ 2
+        3 : facteur ⬅ 3
+    fin_selon
+
+    /////////////////////////////////////////// Début de la partie ///////////////////////////////////////////
+    pour i de 1 à (10 * nombre_joueur) pas 1 faire
+        temps_écoulé ⬅  25
+        tour ⬅  1 - tour
+        score_j1 ⬅  0
+        score_j2 ⬅  0
+        reponse_joueur ⬅ 0
+
+        //////// Affichage de la question prise aléatoirement dans la base de donnée en fonction de la difficulté ///////
+        Afficher "question", questions
+
+        //////// Importation des reponses en fonction de la question aléatoire ////////
+        reponses ⬅ (toutes les reponses où question_id = questions.id)
+
+        //////// Initialisation du timer ////////
+        tant que temps_écoulé > 0 ET reponse_joueur > 0 faire
+
+            /////// Boucle pour connaitre si la bonne reponse et juste en fonction de la question dans la base de donnée //////
+            pour i de 0 à 3 pas 1 faire:
+                //////// Afficheage des reponses ////////
+                afficher "Réponses : ", reponses[i]
+                si reponses[i].juste = 1 alors
+                    bonne_rep ⬅ id
+                fin_si
+            fin_pour
+
+            /////////// Choix de la reponse par le joueur //////////
+            répéter
+                Sasir "choix de la reponse : ", reponse_joueur
+            jusqu'à reponse_joueur ≥  1 OU reponse_joueur ≤ 4
+
+            si reponse_joueur = bonne_rep+1 alors
+                afficher "Bonne reponse"
+                si tour = 0 alors
+                    score_j1 ⬅ (score_j1 + (point_max * (temps_écoulé / timer))) * facteur
+                sinon
+                    score_j2 ⬅  (score_j2 + (point_max * (temps_écoulé / timer))) * facteur
+                fin_si 
+            sinon
+                afficher "Mauvaise réponse"
+            fin_si
+            attendre une seconde
+            temps_écoulé ⬅  temps_écoulé - 1
+        fin_tant_que 
+    fin_pour
+
+    ////////////////////////////////////////// Fin du jeu au bout de 10 questions ///////////////////////////////////////////
+    ///////////////////////////////////////// Affichage des scores et du vaiqueur ///////////////////////////////////////////
+    si score_j1 < score_j2 alors
+        afficher "le joueur 2 remporte la victoire avec un score total de :" , score_j2   
+    sinon
+        afficher "le joueur 1 remporte la victoire avec un score total de :" , score_j1
+    fin_si
+
+    afficher "score final du joueur 1:" , score_j1 , "score final du joueur 2 :" , score_j2 
+    
+fin
